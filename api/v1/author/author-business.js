@@ -15,7 +15,7 @@ const findById = async (id) => {
 }
 
 const deleteById = async (id) => {  
-    const user = await repository.findById(id);
+    const user = await repository.deleteById(id);
 
     if(user.books.length > 0) return
 

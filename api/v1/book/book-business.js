@@ -14,13 +14,8 @@ const findById = async (id) => {
     return repository.findById(id);
 }
 
-const deleteById = async (id) => {
-    repository.deleteById(id);
-}
-
 module.exports = {
     create,
     list,
-    findById,
-    deleteById
+    findById
 }

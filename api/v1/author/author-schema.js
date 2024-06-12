@@ -22,8 +22,18 @@ const getById = {
     })
 }
 
+const deleteById = {
+    params: Joi.object({
+        id: Joi
+            .number()
+            .integer()
+            .required()
+    })
+}
+
 
 module.exports = {
     createSchema,
-    getById
+    getById,
+    deleteById
 };
