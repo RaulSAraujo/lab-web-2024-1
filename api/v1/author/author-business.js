@@ -1,8 +1,6 @@
 const repository = require('./author-repository')
 
 const create = async (book) => {
-
-    //logica negocio
     return repository.save(book);
 }
 
@@ -15,9 +13,9 @@ const findById = async (id) => {
 }
 
 const deleteById = async (id) => {  
-    const user = await repository.deleteById(id);
+    const author = await repository.findById(id);
 
-    if(user.books.length > 0) return
+    if(author.books.length > 0) return
 
     repository.deleteById(id);
 }

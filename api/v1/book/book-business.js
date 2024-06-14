@@ -1,8 +1,6 @@
 const repository = require('./book-repository')
 
 const create = async (book) => {
-
-    //logica negocio
     return repository.save(book);
 }
 
