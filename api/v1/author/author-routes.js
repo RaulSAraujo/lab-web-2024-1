@@ -1,8 +1,8 @@
-const { getAuthor, create, findById, deleteById } = require('./author-controller');
+const { create, deleteById, findById, getAuthor } = require('./author-controller');
 const schema = require('./author-schema');
 
 const plugin = {
-    name: 'book-v1-route',
+    name: 'author-v1-route',
     version: '1',
     register: (server) => {
         server.route([
@@ -20,7 +20,6 @@ const plugin = {
                 path: "/v1/authors/{id}",
                 options: {
                     tags: ['api'],
-                    description: 'Create a authors',
                     handler: findById,
                     validate: schema.getById
                 }
@@ -30,13 +29,14 @@ const plugin = {
                 path: "/v1/authors",
                 options: {
                     tags: ['api'],
+                    description: 'Create a authors',
                     handler: create,
                     validate: schema.createSchema
                 }
             },
             {
                 method: "DELETE",
-                path: "/v1/authors",
+                path: "/v1/authors/{id}",
                 options: {
                     tags: ['api'],
                     handler: deleteById,

@@ -5,9 +5,9 @@ const Author = database.sequelize.define('Author', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        allowNull: true,
+        allowNull: false,
         primaryKey: true,
-        field: 'id' //nome do atributo do banco
+        field: 'codigo'
     },
     name: {
         type: Sequelize.STRING,
@@ -24,7 +24,7 @@ const Author = database.sequelize.define('Author', {
     }
 }, {
     timestamps: false,
-    tableName: 'tb_author' //nome da tabela banco
+    tableName: 'tb_author'
 });
 
 module.exports = Author;

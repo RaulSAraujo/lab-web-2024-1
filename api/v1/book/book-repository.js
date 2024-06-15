@@ -7,28 +7,32 @@ const save = async (book) => {
 }
 
 const findAll = async (query) => {
-    const { title, authorName } = query;
+    const { authorId, title, author } = query;
 
-    return bookModel.findAll({
-        include: [{
-            model: Author,
-            required: true //inner
-        }],
-        where: {
-            ...(title) ? { title: { [Op.iLike]: `${title}%` } } : {},
-            ...(authorName) ? { name: { [Op.iLike]: `${authorName}%` } } : {}
-        }
-    });
+    try {
+        const res = await bookModel.findAll({
+            include: Author,
+            where: {
+                ...(authorId) ? { authorId } : {},
+                ...(title) ? { title: { [Op.iLike]: `${title}%` } } : {},
+                ...(author && author.name) ? { '$Author.name$': { [Op.iLike]: `${author.name}%` } } : {},
+            }
+        });
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 const findById = async (id) => {
     return bookModel.findOne({
         include: [{
             model: Author,
-            required: true //left
+            required: false
         }],
         where: {
-            id: id
+            ...(id) ? { id } : {},
         }
     })
 }

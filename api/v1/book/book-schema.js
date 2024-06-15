@@ -6,7 +6,8 @@ const createSchema = {
             .string()
             .required(),
         authorId: Joi
-            .string()
+            .number()
+            .integer()
             .required(),
         publishedDate: Joi
             .string()
@@ -24,7 +25,7 @@ const getAll = {
     query: Joi.object({
         title: Joi
             .string(),
-        authorname: Joi
+        authorName: Joi
             .string()
     })
 }

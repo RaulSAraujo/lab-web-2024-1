@@ -1,27 +1,27 @@
 const authorModel = require('./author-model');
-const Book = require('../book/book-model');
+const book = require('../book/book-model')
 
-const save = async (book) => {
-    return authorModel.create(book);
+const save = async (author) => {
+    return authorModel.create(author);
 }
 
 const findAll = async () => {
-    return authorModel.findAll({
-        include: [{
-            model: Book,
-            required: true //inner
-        }]
-    });
+    try {
+        const author = await authorModel.findAll({
+            include: book,
+        });
+
+        return author
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 const findById = async (id) => {
     return authorModel.findOne({
-        include: [{
-            model: Book,
-            required: false //left
-        }],
+        include: book,
         where: {
-            id: id
+            ...(id) ? { id } : {},
         }
     })
 }
@@ -29,7 +29,7 @@ const findById = async (id) => {
 const deleteById = async (id) => {
     authorModel.destroy({
         where: {
-            id: id
+            ...(id) ? { id } : {},
         }
     });
 }

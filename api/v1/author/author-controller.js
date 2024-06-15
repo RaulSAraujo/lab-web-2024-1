@@ -18,7 +18,6 @@ const create = async (request, h) => {
 }
 
 const findById = async (request, h) => {
-
     const productId = request.params.id;
 
     return h.response(await business.findById(productId));

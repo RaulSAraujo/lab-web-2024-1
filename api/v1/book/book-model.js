@@ -1,14 +1,14 @@
 const Sequelize = require('sequelize');
 const database = require('../../../config/db');
-const Author = require('../author/author-model'); // alterar
+const Author = require('../author/author-model');
 
 const Book = database.sequelize.define('Book', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        allowNull: true,
+        allowNull: false,
         primaryKey: true,
-        field: 'id' //nome do atributo do banco
+        field: 'codigo'
     },
     title: {
         type: Sequelize.STRING,
@@ -28,17 +28,24 @@ const Book = database.sequelize.define('Book', {
     },
     authorId: {
         type: Sequelize.INTEGER,
-        field: 'author_id',
+        allowNull: false,
         references: {
-            model: 'author',
+            model: 'Author',
             key: 'id'
-        }
-    }
+        },
+        field: 'author_id'
+    },
 }, {
     timestamps: false,
-    tableName: 'tb_book' //nome da tabela banco
+    tableName: 'tb_book',
 });
 
-Book.belongsTo(Author, { foreignKey: 'authorId' });
+Author.hasMany(Book, {
+    foreignKey: 'authorId'
+});
+
+Book.belongsTo(Author, {
+    foreignKey: 'id'
+});
 
 module.exports = Book;

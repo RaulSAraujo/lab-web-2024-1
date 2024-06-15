@@ -1,7 +1,7 @@
 const repository = require('./author-repository')
 
-const create = async (book) => {
-    return repository.save(book);
+const create = async (author) => {
+    return repository.save(author);
 }
 
 const list = async (query) => {
@@ -15,7 +15,7 @@ const findById = async (id) => {
 const deleteById = async (id) => {  
     const author = await repository.findById(id);
 
-    if(author.books.length > 0) return
+    if(author.Books.length > 0) throw new Error('Unable to delete author.')
 
     repository.deleteById(id);
 }

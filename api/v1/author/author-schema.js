@@ -25,8 +25,7 @@ const getById = {
 const deleteById = {
     params: Joi.object({
         id: Joi
-            .number()
-            .integer()
+            .string()
             .required()
     })
 }
